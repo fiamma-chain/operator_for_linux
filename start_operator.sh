@@ -48,7 +48,7 @@ sudo systemctl status $SERVICE_NAME --no-pager
 if systemctl is-active --quiet $SERVICE_NAME; then
   echo "==== Fiamma Operator systemd service is running ===="
   echo "Logs are being saved to: $LOG_DIR/bitvm-operator.<date>.log"
-  echo "To view logs: tail -f $LOG_DIR/bitvm-operator.$(date +%Y-%m-%d).log"
+  echo "To view logs: tail -f $LOG_DIR/bitvm-operator.$(date +%Y-%m-%d-%H).log"
 else
   echo "Error: Fiamma Operator systemd service failed to start."
   exit 1
