@@ -2,7 +2,7 @@ bridge_url: wss://testnet4-dev-bridge-api.fiammachain.io/ws
 bridge_http_url: https://testnet4-dev-bridge-api.fiammachain.io
 http_server_addr: 0.0.0.0:65000
 metrics_endpoint: 0.0.0.0:9102
-master_db_url: postgres://admin:admin123@localhost:8433/bitvm-operator
+master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
 health_check_port: 63003
 connect_retry_times: 1
 bitcoin_confirms_threshold: 1
