@@ -1,0 +1,6 @@
+# signet.
+# curl --user fiamma --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getblockcount", "params": []}' -H 'content-type: text/plain;' http://0.0.0.0:38332
+http_url: http://127.0.0.1:38332
+rpc_user: fiamma
+rpc_password: fiamma
+confirms_threshold: 1

@@ -1,0 +1,58 @@
+bridge_url: ws://127.0.0.1:53001
+bridge_http_url: http://127.0.0.1:53000
+http_server_addr: 0.0.0.0:55000
+metrics_endpoint: 0.0.0.0:9102
+master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
+health_check_port: 53003
+connect_retry_times: 1
+bitcoin_confirms_threshold: 1
+bitcoin_network: Signet
+mempool_url: https://blockbook-bitcoin-signet.fiammachain.io/api/v2
+bitcoin_rpc: http://127.0.0.1:38332
+bitcoin_rpc_user: fiamma
+bitcoin_rpc_password: fiamma
+bridge_addresses:
+  - 0xD05B5494a10A1Fc28F242AB6B434C4f5806B163f  # evm
+  - bbn1qwlgtx52gsdu7dtp0cekka5zehdl0uj3fhp9acg325fvgs8jdzksawp5cw  # babylon
+  - 0xf5A285d27b5A51303aC9935FFeD7034443edFBb5 # bob
+  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # monad
+  - 0xFBfaC50135951efcc42E3A899B4796E11cF1AED3  # zksync
+  - 0xCD278573dACC392fD3a0CEA290F2d4d63c6cA707  # arbitrum
+  - 0x3FD7255cCC584397226461E57D0E1CFb1259621a  # optimism
+  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # plume
+  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # tatara
+  - 0x6c86428C81025b4a78D065f70044e315E4C360c8  # hemi
+redis_url: redis://127.0.0.1:7379
+protocol_fee_address: "tb1p2tge53kp4rxeqqq6s9jzq3ytvykecyaak5xs94ck6sgaaw2deycqs6dskr"
+feerate_rpc_url: https://mempool.space/signet/api/v1/fees/recommended
+# Time lock in seconds.
+# connector one's time lock: 30*60s=30min
+connector_one_sequence: 6
+# connector three's time lock: 30*60s=30min
+connector_three_sequence: 6
+# connector burn's time lock: 30*60s=30min
+connector_burn_sequence: 12
+min_pegin_amount: 100000
+max_pegin_amount: 300000000
+min_pegout_amount: 100000
+max_pegout_amount: 300000000
+pegout_operator_fee_amount: 5000
+
+# Side chains that the operator supports
+side_chains:
+  # - chain: "Ethereum"
+  - "Holesky"
+  - "Solana"
+  - "Anvil"
+  - "Babylon"
+  - "BOB"
+  - "Monad"
+  - "ZKSYNC"
+  - "Arbitrum"
+  - "Optimism"
+  - "Plume"
+  - "Tatara"
+  - "Hemi"
+# Auto split UTXOs to pegin & pegout address from splitter address
+# If this is true, operator must set `BITVM_BRIDGE_OPERATOR_SPLITTER_SK` in `.env` file.
+auto_split: true

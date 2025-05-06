@@ -1,0 +1,40 @@
+services:
+  postgres:
+    container_name: bitvm-operator-DB
+    restart: unless-stopped
+    env_file: .env
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      # - strapi-data:/var/lib/postgresql/data/ #using a volume
+      - ./db-data:/var/lib/postgresql/data/ # if you want to use a bind folder
+      - ./scripts/main_postgresql.conf:/etc/postgresql/postgresql.conf
+
+    expose:
+      - "7433" # Publishes 5433 to other containers but NOT to host machine
+    ports:
+      - "7433:7433"
+    command: -p 7433
+    networks:
+      - bitvm-operator-db-sync
+
+  redis:
+    container_name: bitvm-operator-redis
+    image: redis:latest
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+    command: redis-server --save 20 1 --loglevel warning
+
+volumes:
+  strapi-data:
+  redis-data:
+
+networks:
+  bitvm-operator-db-sync:
+    driver: operator

@@ -1,0 +1,55 @@
+bridge_url: wss://testnet4-dev-bridge-api.fiammachain.io/ws
+bridge_http_url: https://testnet4-dev-bridge-api.fiammachain.io
+http_server_addr: 0.0.0.0:65000
+metrics_endpoint: 0.0.0.0:9102
+master_db_url: postgres://admin:admin123@localhost:8433/bitvm-operator
+health_check_port: 63003
+connect_retry_times: 1
+bitcoin_confirms_threshold: 1
+bitcoin_network: Testnet
+mempool_url:  https://blockbook-bitcoin-testnet4.fiammachain.io/api/v2
+bitcoin_rpc: http://127.0.0.1:48332
+bitcoin_rpc_user: fiamma
+bitcoin_rpc_password: fiamma
+bridge_addresses:
+  - 0xaDD6bcf0469742fCCcf852c4633024f70BA0788F  # evm
+  - bbn1kuglu9hazls93h4pwcehk6gwrvv9uznfja6afjdanyud8fwkzlrqqj7app  # babylon
+  - 0x21F587c40fe9D23CC02D043F6737f4FE5CED77E8 # bob
+  - 0xa93005d851949D695614c80B1c7E7DBF933F3042  # monad
+  - 0x8075569554f75cBD1e7670d9d8dF4EB4E961F5D4  # zksync
+  - 0x5b56a9D8e965FbCBc80FBbcF6FC261F83b80Ef83  # arbitrum
+  - 0xb9E90c261cb84149b577E59e31dFbEd812E037Ba  # optimism
+  - 61fMthx56rhcDvWB86fFsasCsXSQdUzAFGKTheFabU5e  # solana
+redis_url: redis://127.0.0.1:6379
+protocol_fee_address: "tb1p529huj0urmtcm75qhjkn942e76aqzj33mg4g5kymagpcq5ncsqhsq7pr5x"
+feerate_rpc_url: https://mempool.space/testnet4/api/v1/fees/recommended
+
+# Time lock in seconds.
+# connector one's time lock: 30*60s=30min
+connector_one_sequence: 6
+# connector three's time lock: 30*60s=30min
+connector_three_sequence: 6
+# connector burn's time lock: 30*60s=30min
+connector_burn_sequence: 12
+min_pegin_amount: 100000
+max_pegin_amount: 300000000
+min_pegout_amount: 100000
+max_pegout_amount: 300000000
+pegout_operator_fee_amount: 5000
+
+# Side chains that the operator supports
+side_chains:
+  # - chain: "Ethereum"
+  - "Holesky"
+  - "Solana"
+  - "Anvil"
+  - "Babylon"
+  - "BOB"
+  - "Monad"
+  - "ZKSYNC"
+  - "Arbitrum"
+  - "Optimism"
+
+# Auto split UTXOs to pegin & pegout address from splitter address
+# If this is true, operator must set `BITVM_BRIDGE_OPERATOR_SPLITTER_SK` in `.env` file.
+auto_split: true
