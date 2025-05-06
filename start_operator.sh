@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Fiamma Operator Systemd Service Script
 echo "==== Starting Fiamma Operator as a systemd service ===="
@@ -34,8 +34,6 @@ WorkingDirectory=$PROJECT_DIR
 ExecStart=$PROJECT_DIR/fiamma-operator
 Environment=FIAMMA_MONO_CONFIG_PATH=$PARENT_DIR/operator_for_linux
 Restart=on-failure
-StandardOutput=append:$LOG_DIR/bitvm-operator.$(date +%%Y-%%m-%%d).log
-StandardError=append:$LOG_DIR/bitvm-operator.$(date +%%Y-%%m-%%d).log
 
 [Install]
 WantedBy=multi-user.target
