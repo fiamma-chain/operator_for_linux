@@ -17,9 +17,6 @@ if ! pidof systemd > /dev/null; then
   exit 1
 fi
 
-# Create log directory
-mkdir -p "$LOG_DIR"
-
 # Create systemd service unit file (if it doesn't exist)
 if [ ! -f "$SYSTEMD_PATH" ]; then
   echo "Creating systemd service file at $SYSTEMD_PATH"
