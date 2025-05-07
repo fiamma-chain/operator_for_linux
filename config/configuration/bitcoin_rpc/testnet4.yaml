@@ -1,4 +1,4 @@
-http_url: http://127.0.0.1:48332
+http_url: https://bitcoin-testnet4.fiammachain.io
 rpc_user: fiamma
 rpc_password: fiamma
 confirms_threshold: 1

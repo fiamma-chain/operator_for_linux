@@ -8,7 +8,7 @@ connect_retry_times: 1
 bitcoin_confirms_threshold: 1
 bitcoin_network: Signet
 mempool_url: https://blockbook-bitcoin-signet.fiammachain.io/api/v2
-bitcoin_rpc: http://127.0.0.1:38332
+bitcoin_rpc: https://bitcoin-signet.fiammachain.io
 bitcoin_rpc_user: fiamma
 bitcoin_rpc_password: fiamma
 bridge_addresses:
