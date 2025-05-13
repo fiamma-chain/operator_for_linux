@@ -26,7 +26,7 @@ This script will:
 Edit the `.env` file and set the following important keys:
 
 ```bash
-nano .env
+vim .env
 ```
 
 Make sure to update these required private keys:
