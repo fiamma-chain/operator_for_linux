@@ -25,13 +25,16 @@ bridge_addresses:
 redis_url: redis://127.0.0.1:7379
 protocol_fee_address: "tb1p2tge53kp4rxeqqq6s9jzq3ytvykecyaak5xs94ck6sgaaw2deycqs6dskr"
 feerate_rpc_url: https://mempool.space/signet/api/v1/fees/recommended
-# Time lock in seconds.
-# connector one's time lock: 30*60s=30min
+# Time lock in height
+# connector one's time lock
 connector_one_sequence: 6
-# connector three's time lock: 30*60s=30min
+# connector three's time lock
 connector_three_sequence: 6
-# connector burn's time lock: 30*60s=30min
+# connector burn's time lock
 connector_burn_sequence: 12
+# operator stake time lock
+operator_stake_time_lock: 1
+
 min_pegin_amount: 100000
 max_pegin_amount: 300000000
 min_pegout_amount: 100000
