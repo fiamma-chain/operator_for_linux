@@ -1,5 +1,5 @@
-bridge_url: ws://127.0.0.1:54001
-bridge_http_url: http://127.0.0.1:54000
+bridge_url: wss://beta-bridge-api.fiammachain.io/ws
+bridge_http_url: https://beta-bridge-api.fiammachain.io
 http_server_addr: 0.0.0.0:55000
 metrics_endpoint: 0.0.0.0:9102
 master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
@@ -28,7 +28,6 @@ connector_three_sequence: 6
 connector_burn_sequence: 12
 # operator stake time lock
 operator_stake_time_lock: 1
-
 min_pegin_amount: 100000
 max_pegin_amount: 300000000
 min_pegout_amount: 100000

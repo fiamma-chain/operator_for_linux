@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 set -eo pipefail
 
 if ! [ -x "$(command -v psql)" ]; then
@@ -23,7 +22,7 @@ else
     echo "Network $NETWORK_NAME already exists. Doing nothing."
 fi
 
-pwd=$(pwd)
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 # Check if a custom user has been set, otherwise default to 'postgres'
 DB_USER=${POSTGRES_USER:=admin}
@@ -40,12 +39,12 @@ if [[ -z "${SKIP_DOCKER}" ]]
 then
     # rm -rf ./scripts/data-backup
     docker run \
-        --mount type=bind,source="${pwd}"/dal/scripts/main_postgresql.conf,target=/etc/postgresql/postgresql.conf \
-        --mount type=bind,source="${pwd}"/dal/scripts/main_pg_hba.conf,target=/etc/postgresql/pg_hba.conf \
-        -v "${pwd}"/dal/scripts/bitvm_operator_pgdata:/var/lib/postgresql/data \
-        -v "${pwd}"/dal/scripts/archivelog:/archivelog \
-        -v "${pwd}"/dal/scripts/data-backup:/tmp/postgresslave \
-        --net $NETWORK_NAME \
+        --mount type=bind,source="${PROJECT_ROOT}"/dal/scripts/main_postgresql.conf,target=/etc/postgresql/postgresql.conf \
+        --mount type=bind,source="${PROJECT_ROOT}"/dal/scripts/main_pg_hba.conf,target=/etc/postgresql/pg_hba.conf \
+        -v "${PROJECT_ROOT}"/dal/scripts/bitvm_operator_pgdata:/var/lib/postgresql/data \
+        -v "${PROJECT_ROOT}"/dal/scripts/archivelog:/archivelog \
+        -v "${PROJECT_ROOT}"/dal/scripts/data-backup:/tmp/postgresslave \
+        --network $NETWORK_NAME \
         --name bitvm_operator_db \
         -e POSTGRES_USER=${DB_USER} \
         -e POSTGRES_PASSWORD=${DB_PASSWORD} \
@@ -65,7 +64,7 @@ done
 
 export DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@localhost:${DB_PORT}/${DB_NAME}
 sqlx database create
-cd "${pwd}"/dal && sqlx migrate run
+cd ${PROJECT_ROOT}/dal && sqlx migrate run
 
 >&2 echo "Postgres has been migrated"
 
@@ -73,8 +72,6 @@ psql -h "localhost" -U "${DB_USER}" -p "${DB_PORT}" -d "${DB_NAME}" -c "DROP ROL
 psql -h "localhost" -U "${DB_USER}" -p "${DB_PORT}" -d "${DB_NAME}" -c "CREATE ROLE repl REPLICATION LOGIN ENCRYPTED PASSWORD '${DB_REPL_PASSWORD}';"
 
 >&2 echo "Replication role repl has been created"
-
-# docker exec bitvm_operator_main sh -c "rm -rf /tmp/postgresslave/* && mkdir -p /tmp/postgresslave"
 
 docker exec bitvm_operator_db sh -c "pg_basebackup -h bitvm_operator_db -U repl -p 5432 -F p -X s -P -R -D /tmp/postgresslave"
 

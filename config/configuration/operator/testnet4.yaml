@@ -33,7 +33,6 @@ connector_three_sequence: 6
 connector_burn_sequence: 12
 # operator stake time lock
 operator_stake_time_lock: 1
-
 min_pegin_amount: 100000
 max_pegin_amount: 300000000
 min_pegout_amount: 100000
