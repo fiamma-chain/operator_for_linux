@@ -50,7 +50,7 @@ if ! command -v docker &> /dev/null; then
     # Add the current user to the docker group
     sudo groupadd docker 2>/dev/null || true
     sudo usermod -aG docker $USER
-    newgrp docker
+    echo "✅ Added user to docker group. You may need to log out and back in for changes to take effect."
     
     # Configure Docker to start on boot
     sudo systemctl enable docker.service
