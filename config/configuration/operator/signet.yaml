@@ -1,4 +1,4 @@
-bridge_url: ws://beta-bridge-api.fiammachain.io/ws
+bridge_url: wss://beta-bridge-api.fiammachain.io/ws
 bridge_http_url: https://beta-bridge-api.fiammachain.io
 http_server_addr: 0.0.0.0:55000
 metrics_endpoint: 0.0.0.0:9102
