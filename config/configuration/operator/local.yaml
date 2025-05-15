@@ -58,5 +58,5 @@ side_chains:
   # - "Tatara"
   # - "Hemi"
 # Auto split UTXOs to pegin & pegout address from splitter address
-# If this is true, operator must set `BITVM_BRIDGE_OPERATOR_SPLITTER_SK` in `.env` file.
+# If this is true, operator must set `BITVM_BRIDGE_OPERATOR_AUTH_SK` in `.env` file.
 auto_split: true
