@@ -32,7 +32,7 @@ The main address's public key is required for registration. Here's how to obtain
 
 ```
 cd operator_for_linux
-./bcli operator -n testnet4 derive-key -s `private_key_of_main_address`
+./bcli operator -n beta-testnet derive-key -s `private_key_of_main_address`
 ```
 Use `public_key` to complete the registration process below.
 
@@ -78,4 +78,32 @@ When the staking status is `committee_signed`, wait for the stake transaction to
 ```
 
 If the `status` is `Active`, it means the operator has completed the staking process and has started working.
+
+## Quit Operator
+
+If an operator wants to stop receiving new tasks, they can execute the following command to pause receiving new pegin and pegout tasks, but will continue processing already received tasks.
+
+```
+./bcli operator -n beta-testnet pause
+```
+
+To resume receiving new tasks, execute the following command:
+
+```
+./bcli operator -n beta-testnet resume
+```
+
+If you want to permanently exit, you need to execute the following command to submit an unregister operator request. Please note that this will not immediately make the operator exit - it only notifies the bridge that the operator wants to exit. You will need to continue running the fiamma-operator for some time to complete all received pegin and pegout tasks.
+
+When the bridge checks that the operator has met the exit conditions (processed all in-progress pegin and pegout tasks), it will automatically broadcast the operator's unstake transaction to help the operator recover their stake funds.
+
+```
+./bcli operator -n beta-testnet unstake -a <MAIN_ADDRESS>
+```
+
+When the operator's status changes to `Inactive`, you can withdraw all funds from the three addresses to a specified address:
+
+```
+./bcli operator -n beta-testnet collect-utxos -r <RECEIVER_ADDRESS>
+```
 
