@@ -32,7 +32,7 @@ The main address's public key is required for registration. Here's how to obtain
 
 ```
 cd operator_for_linux
-./bcli operator -n beta-testnet derive-key -s `private_key_of_main_address`
+./bcli operator -n beta-testnet derive-key -s <MAIN_ADDRESS_PRIVATE_KEY>
 ```
 Use `public_key` to complete the registration process below.
 
@@ -43,7 +43,7 @@ Use `public_key` to complete the registration process below.
 Execute the following command in the terminal to register as an operator:
 
 ```
-./bcli operator register --invitation-code <INVITATION_CODE> --main-address <MAIN_ADDRESS> --pegin-address <PEGIN_ADDRESS> --pegout-address <PEGOUT_ADDRESS> --public-key <PUBLIC_KEY>
+./bcli operator register --invitation-code <INVITATION_CODE> --main-address <MAIN_ADDRESS> --pegin-address <PEGIN_ADDRESS> --pegout-address <PEGOUT_ADDRESS> --public-key <MAIN_ADDRESS_PUBLIC_KEY>
 ```
 
 ## Operator Staking Process
