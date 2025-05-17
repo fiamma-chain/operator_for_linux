@@ -107,3 +107,4 @@ When the operator's status changes to `Inactive`, you can withdraw all funds fro
 ./bcli operator -n beta-testnet collect-utxos -r <RECEIVER_ADDRESS>
 ```
 
+> ⚠️ **Important**: Do not execute the `collect-utxos` command while the operator is still active. This command should only be used after the operator has been fully deactivated and all pending tasks have been completed.
