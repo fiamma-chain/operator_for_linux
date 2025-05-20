@@ -50,7 +50,6 @@ if ! command -v docker &> /dev/null; then
     # Add the current user to the docker group
     sudo groupadd docker 2>/dev/null || true
     sudo usermod -aG docker $USER
-    newgrp docker
     echo "✅ Added user to docker group. You may need to log out and back in for changes to take effect."
     
     # Configure Docker to start on boot
@@ -94,7 +93,7 @@ fi
 # Try to start the database
 echo "🛢️ Attempting to start the database..."
 cd "$SCRIPT_DIR"
-./start_db.sh || {
+sg docker -c "./start_db.sh" || {
     echo "⚠️ Note: Database startup may require configuration. Please check for errors and resolve manually."
 }
 
