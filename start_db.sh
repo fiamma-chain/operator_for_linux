@@ -4,7 +4,6 @@ echo "==== Starting Database Services ===="
 
 # Execute the database initialization script
 echo "Running database initialization script..."
-sudo newgrp docker
 ./dal/scripts/init_main_db.sh
 
 echo ""
