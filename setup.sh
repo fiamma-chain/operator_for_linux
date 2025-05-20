@@ -100,7 +100,7 @@ sg docker -c "./start_db.sh" || {
 # Try to start Redis
 echo "🔄 Attempting to start Redis..."
 cd "$SCRIPT_DIR"
-./start_redis.sh || {
+sg docker -c "./start_redis.sh" || {
     echo "⚠️ Note: Redis startup may require configuration. Please check for errors and resolve manually."
 }
 
