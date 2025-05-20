@@ -118,7 +118,7 @@ The following commands allow you to query various aspects of the operator's stat
 To view statistics about the operator's processing activities, including daily and weekly task counts:
 
 ```
-./bcli operator -n beta-testnet query-processing-stats -i <OPERATOR_ID>
+./bcli operator -n beta-testnet processing-stats -i <OPERATOR_ID>
 ```
 
 This command displays:
@@ -132,13 +132,13 @@ This command displays:
 To view pending pegin tasks that need to be processed:
 
 ```
-./bcli operator -n beta-testnet query-pending-pegin -i <OPERATOR_ID>
+./bcli operator -n beta-testnet pending-pegin -i <OPERATOR_ID>
 ```
 
 To view pending pegout tasks that need to be processed:
 
 ```
-./bcli operator -n beta-testnet query-pending-pegout -i <OPERATOR_ID>
+./bcli operator -n beta-testnet pending-pegout -i <OPERATOR_ID>
 ```
 
 These commands show the tasks currently waiting for operator processing, including their IDs, amounts, and update times.
@@ -148,7 +148,7 @@ These commands show the tasks currently waiting for operator processing, includi
 To view the operator's earnings from successfully processed tasks:
 
 ```
-./bcli operator -n beta-testnet query-earnings -i <OPERATOR_ID>
+./bcli operator -n beta-testnet earnings -i <OPERATOR_ID>
 ```
 
 This command displays:
