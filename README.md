@@ -80,8 +80,8 @@ If you encounter issues:
 
 1. Verify the database and Redis are running:
    ```bash
-   docker ps | grep postgres
-   docker ps | grep redis
+   sudo docker ps | grep postgres
+   sudo docker ps | grep redis
    ```
 
 2. Check if the environment variables are set correctly in the `.env` file.

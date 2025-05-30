@@ -106,8 +106,8 @@ sg docker -c "./start_redis.sh" || {
 
 echo "🎉 ==== Environment Preparation Complete ===="
 echo "📋 If you encounter any issues, check the status of related services and logs:"
-echo "🐘 PostgreSQL status: docker ps | grep postgres"
-echo "🔄 Redis status: docker ps | grep redis"
+echo "🐘 PostgreSQL status: sudo docker ps | grep postgres"
+echo "🔄 Redis status: sudo docker ps | grep redis"
 echo ""
 echo "▶️ Next, you can try running:"
 echo "cd \"$SCRIPT_DIR\" && ./start_operator.sh"
