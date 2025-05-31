@@ -46,6 +46,7 @@ then
         -v "${PROJECT_ROOT}"/dal/scripts/data-backup:/tmp/postgresslave \
         --network $NETWORK_NAME \
         --name bitvm_operator_db \
+        --shm-size=256m \
         -e POSTGRES_USER=${DB_USER} \
         -e POSTGRES_PASSWORD=${DB_PASSWORD} \
         -e POSTGRES_DB=${DB_NAME} \

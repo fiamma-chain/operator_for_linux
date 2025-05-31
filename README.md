@@ -21,6 +21,12 @@ This script will:
 - Start database and Redis containers
 - Set execute permissions on scripts
 
+Next, run database migrations to set up the required database schema:
+
+```bash
+cd dal && cp .env.example .env && sqlx migrate run
+```
+
 ### Step 2: Configure Environment Variables
 
 Edit the `.env` file and set the following important keys:
