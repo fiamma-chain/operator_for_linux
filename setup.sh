@@ -74,6 +74,7 @@ fi
 # Install SQLx CLI
 echo "🔧 Installing SQLx CLI..."
 cargo install sqlx-cli
+source "$HOME/.cargo/env"
 echo "✅ SQLx CLI installed."
 
 # Ensure all scripts have execute permissions
