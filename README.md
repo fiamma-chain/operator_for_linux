@@ -1,10 +1,19 @@
 # Fiamma Operator for Linux
 
-This guide will help you set up and run the Fiamma Operator on Linux systems. The process involves three simple steps:
+This guide will help you set up and run the Fiamma Operator on Linux systems. The process involves four simple steps:
 
 ## Setup Process
 
-### Step 1: Prepare the Environment
+### Step 1: Clone the Repository
+
+First, clone the repository to your local machine:
+
+```bash
+git clone https://github.com/fiamma-chain/operator_for_linux.git
+cd operator_for_linux
+```
+
+### Step 2: Prepare the Environment
 
 Run the setup script to install all dependencies and prepare your environment:
 
@@ -24,10 +33,10 @@ This script will:
 Next, run database migrations to set up the required database schema:
 
 ```bash
-cd dal && cp .env.example .env && sqlx migrate run
+cd dal && cp .env.example .env && sqlx migrate run && cd ..
 ```
 
-### Step 2: Configure Environment Variables
+### Step 3: Configure Environment Variables
 
 Edit the `.env` file and set the following important keys:
 
@@ -44,7 +53,7 @@ BITVM_BRIDGE_OPERATOR_PEGOUT_SK=your_pegout_private_key
 
 These private keys are essential for the Operator to function correctly and should not be the same.
 
-### Step 3: Start the Operator
+### Step 4: Start the Operator
 
 Run the start script to set up and start the Operator as a system service:
 
