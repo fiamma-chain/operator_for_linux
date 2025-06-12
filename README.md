@@ -89,6 +89,42 @@ sudo systemctl restart fiamma-operator
 sudo systemctl stop fiamma-operator
 ```
 
+## Upgrading the Operator
+
+To upgrade your Fiamma Operator to the latest version, follow these steps:
+
+### Step 1: Verify Database Status
+Ensure the database Docker container is running:
+```bash
+sudo docker ps | grep postgres
+```
+
+### Step 2: Pull Latest Updates
+Pull the latest code from the repository:
+```bash
+git pull
+```
+
+### Step 3: Update Database Schema
+Run database migrations to apply any schema changes:
+```bash
+cd dal && sqlx migrate run && cd ..
+```
+
+### Step 4: Restart the Operator Service
+Restart the Fiamma Operator service to apply updates:
+```bash
+sudo systemctl restart fiamma-operator
+```
+
+### Step 5: Verify Upgrade
+Check that the operator is running correctly after the upgrade:
+```bash
+sudo systemctl status fiamma-operator
+```
+
+**Note**: Always backup your data before performing upgrades, especially in production environments.
+
 ## Troubleshooting
 
 If you encounter issues:
