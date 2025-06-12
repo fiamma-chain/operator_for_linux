@@ -77,6 +77,20 @@ cargo install sqlx-cli
 source "$HOME/.cargo/env"
 echo "✅ SQLx CLI installed."
 
+# Detect shell and add cargo env to shell rc file
+if [ -n "$ZSH_VERSION" ]; then
+    SHELL_RC="$HOME/.zshrc"
+elif [ -n "$BASH_VERSION" ]; then
+    SHELL_RC="$HOME/.bashrc"
+else
+    SHELL_RC="$HOME/.profile"
+fi
+
+if ! grep -q 'source \$HOME/.cargo/env' "$SHELL_RC"; then
+    echo "📦 Adding 'source \$HOME/.cargo/env' to $SHELL_RC..."
+    echo 'source $HOME/.cargo/env' >> "$SHELL_RC"
+fi
+
 # Ensure all scripts have execute permissions
 echo "🔐 Setting script execute permissions..."
 chmod +x "$SCRIPT_DIR"/*.sh

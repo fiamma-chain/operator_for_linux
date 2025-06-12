@@ -21,6 +21,20 @@ Run the setup script to install all dependencies and prepare your environment:
 ./setup.sh
 ```
 
+**Important:** After the first execution of `setup.sh`, you need to enable the Rust environment variables:
+
+```bash
+source "$HOME/.cargo/env"
+```
+
+Alternatively, you can restart your terminal or run:
+
+```bash
+source ~/.bashrc
+# or if you're using zsh:
+source ~/.zshrc
+```
+
 This script will:
 - Install required packages (build-essential, gcc, g++, libssl-dev)
 - Install and configure PostgreSQL
