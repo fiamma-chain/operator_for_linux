@@ -15,6 +15,8 @@ bridge_addresses:
   - 0xeCC7EB129fCa72DE21BD065F7FA3Ab1aD400820D #holesky
   - 0x1dB460373869e23a3a04fa56a5405F27BfB67526 #monad
   - 0x9B3Eb09efd2C58f1BcABF47afDE0b44F6b63387e #plume
+  - 0x36b3676D91B469e39d46A075Be789CbBA1e68146 #bsc
+  - 0x938d19B736cc5C19C2613582844975789432ab5C #pharos
 redis_url: redis://127.0.0.1:6379
 protocol_fee_address: "tb1p2tge53kp4rxeqqq6s9jzq3ytvykecyaak5xs94ck6sgaaw2deycqs6dskr"
 feerate_rpc_url: https://mempool.space/signet/api/v1/fees/recommended
@@ -40,3 +42,5 @@ side_chains:
   - "Holesky"
   - "Monad"
   - "Plume"
+  - "BSC"
+  - "Pharos"

@@ -19,7 +19,13 @@ bridge_addresses:
   - 0x8075569554f75cBD1e7670d9d8dF4EB4E961F5D4  # zksync
   - 0x5b56a9D8e965FbCBc80FBbcF6FC261F83b80Ef83  # arbitrum
   - 0xb9E90c261cb84149b577E59e31dFbEd812E037Ba  # optimism
-  - 61fMthx56rhcDvWB86fFsasCsXSQdUzAFGKTheFabU5e  # solana
+  - 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An  # solana 
+  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # plume
+  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # tatara
+  - 0x6c86428C81025b4a78D065f70044e315E4C360c8  # hemi
+  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # bsc
+  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # pharos
+  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # core
 redis_url: redis://127.0.0.1:6379
 protocol_fee_address: "tb1p529huj0urmtcm75qhjkn942e76aqzj33mg4g5kymagpcq5ncsqhsq7pr5x"
 feerate_rpc_url: https://mempool.space/testnet4/api/v1/fees/recommended
@@ -44,10 +50,14 @@ side_chains:
   # - chain: "Ethereum"
   - "Holesky"
   - "Solana"
-  - "Anvil"
-  - "Babylon"
-  - "BOB"
+  # - "Anvil"
+  # - "Babylon"
+  # - "BOB"
   - "Monad"
-  - "ZKSYNC"
-  - "Arbitrum"
-  - "Optimism"
+  # - "ZKSYNC"
+  # - "Arbitrum"
+  # - "Optimism"
+  - "Plume"
+  - "BSC"
+  - "Pharos"
+  - "Core"
