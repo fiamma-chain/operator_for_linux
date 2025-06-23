@@ -31,6 +31,7 @@ WorkingDirectory=$PROJECT_DIR
 ExecStart=$PROJECT_DIR/fiamma-operator
 Environment=FIAMMA_MONO_CONFIG_PATH=$PARENT_DIR/operator_for_linux
 Restart=on-failure
+RestartSec=15
 
 [Install]
 WantedBy=multi-user.target
@@ -41,7 +42,7 @@ fi
 
 # Start the service
 sudo systemctl restart $SERVICE_NAME
-sleep 2
+sleep 8
 
 # Check service status
 sudo systemctl status $SERVICE_NAME --no-pager
