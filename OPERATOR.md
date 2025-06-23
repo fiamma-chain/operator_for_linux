@@ -155,3 +155,16 @@ This command displays:
 - Total earnings (in satoshis)
 - Today's earnings
 - Monthly earnings
+
+### Query Operator APY
+
+To view the operator's Annual Percentage Yield (APY) based on current performance:
+
+```
+./bcli query -n beta-testnet apy -i <OPERATOR_ID>
+```
+
+This command displays:
+- Current APY percentage
+- Historical performance data
+- Projected annual returns based on recent activity
