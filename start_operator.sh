@@ -47,8 +47,21 @@ sleep 8
 # Check service status
 sudo systemctl status $SERVICE_NAME --no-pager
 if systemctl is-active --quiet $SERVICE_NAME; then
+  echo ""
+  echo "  _____ _                                "
+  echo " |  ___(_) __ _ _ __ ___  _ __ ___   __ _ "
+  echo " | |_  | |/ _\` | '_ \` _ \| '_ \` _ \ / _\` |"
+  echo " |  _| | | (_| | | | | | | | | | | | (_| |"
+  echo " |_|   |_|\__,_|_| |_| |_|_| |_| |_|\__,_|"
+  echo "                                        "
+  echo "   ___                       _             "
+  echo "  / _ \ _ __   ___ _ __ __ _| |_ ___  _ __ "
+  echo " | | | | '_ \ / _ \ '__/ _\` | __/ _ \| '__|"
+  echo " | |_| | |_) |  __/ | | (_| | || (_) | |   "
+  echo "  \___/| .__/ \___|_|  \__,_|\__\___/|_|   "
+  echo "       |_|                                "
+  echo ""
   echo "==== Fiamma Operator systemd service is running ===="
-  echo "Logs are being saved to: $LOG_DIR/bitvm-operator.<date>.log"
   echo "To view logs: tail -f $LOG_DIR/bitvm-operator.$(date +%Y-%m-%d-%H).log"
 else
   echo "Error: Fiamma Operator systemd service failed to start."
