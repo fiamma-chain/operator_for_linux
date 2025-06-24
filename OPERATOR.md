@@ -168,3 +168,9 @@ This command displays:
 - Current APY percentage
 - Historical performance data
 - Projected annual returns based on recent activity
+
+Use --help to see more usage for APY query:
+
+```
+./bcli query -n beta-testnet apy -i <OPERATOR_ID> --help
+```
