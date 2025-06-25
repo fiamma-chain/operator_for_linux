@@ -22,9 +22,13 @@ bridge_addresses:
   - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # plume
   - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # tatara
   - 0x6c86428C81025b4a78D065f70044e315E4C360c8  # hemi
+  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # bsc
 redis_url: redis://127.0.0.1:7379
 protocol_fee_address: "tb1p2tge53kp4rxeqqq6s9jzq3ytvykecyaak5xs94ck6sgaaw2deycqs6dskr"
 feerate_rpc_url: https://mempool.space/signet/api/v1/fees/recommended
+vault_manager_addresses:
+  - 0xD05B5494a10A1Fc28F242AB6B434C4f5806B163f
+
 # Time lock in height
 # connector one's time lock
 connector_one_sequence: 6
@@ -56,3 +60,29 @@ side_chains:
   - "Plume"
   - "Tatara"
   - "Hemi"
+  - "BSC"
+
+# Sidechain RPC URLs
+sidechain_rpc_urls:
+  ethereum: ""
+  holesky: ""
+  anvil: "http://127.0.0.1:8545"
+  bob: "https://bob-sepolia.rpc.gobob.xyz/"
+  monad: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
+  zksync: "https://sepolia.era.zksync.dev"
+  optimism: "https://sepolia.optimism.io"
+  arbitrum: "https://sepolia-rollup.arbitrum.io/rpc"
+  babylon: "http://babylon-testnet-grpc.polkachu.com:20690/"
+  solana: "https://api.devnet.solana.com"
+  plume: "https://testnet-rpc.plumenetwork.xyz"
+  tatara: "https://rpc.tatara.katanarpc.com/376fPkjX4x5yEmwJRWDyhN4DSofv1MSkE"
+  hemi: "https://testnet.rpc.hemi.network/rpc"
+  bsc: "https://bsc-testnet.bnbchain.org"
+  pharos: "https://testnet.dplabs-internal.com"
+  core: "https://rpc.test2.btcs.network"
+
+# Prover configuration
+prover_config:
+  rpc_url: "http://127.0.0.1:4464"
+  user: "foo"
+  password: "bar"
