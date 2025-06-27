@@ -64,25 +64,7 @@ BITVM_BRIDGE_OPERATOR_AUTH_SK=your_auth_private_key
 BITVM_BRIDGE_OPERATOR_PEGIN_SK=your_pegin_private_key
 BITVM_BRIDGE_OPERATOR_PEGOUT_SK=your_pegout_private_key
 ```
-
 These private keys are essential for the Operator to function correctly and should not be the same.
-
-#### Sidechain RPC Configuration
-
-Add the following sidechain RPC URLs to your `.env` file to enable cross-chain operations:
-
-```bash
-## BSC (Binance Smart Chain)
-BITVM_BRIDGE_BSC_RPC_URL=https://bsc-testnet.bnbchain.org
-
-## PHAROS
-BITVM_BRIDGE_PHAROS_RPC_URL=https://testnet.dplabs-internal.com
-
-## Core
-BITVM_BRIDGE_CORE_RPC_URL=https://rpc.test2.btcs.network
-```
-
-These URLs configure the operator to connect to various blockchain networks supported by the Fiamma bridge.
 
 ### Step 4: Start the Operator
 
