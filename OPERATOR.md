@@ -55,7 +55,7 @@ After the Operator program starts running, it needs to stake BTC before starting
 ### 1. Transfer Funds
 To successfully complete staking, you need to transfer sufficient BTC to the operator's main address, at least `stake_amount` + `dust` + `gas` BTC.
 
-> Currently, `stake_amount` is 1 BTC, so transfer at least 1.00001 BTC. Since subsequent work requires 12 BTC, it's recommended to transfer at least 13.00001 BTC initially.
+> Currently, `stake_amount` is 1 BTC, so transfer at least 1.00001 BTC. Since subsequent work requires 15 BTC, it's recommended to transfer at least 16.00001 BTC initially.
 
 ### 2. Stake Funds
 
