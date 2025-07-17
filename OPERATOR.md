@@ -11,6 +11,126 @@ To run operator program, you need to:
 
 Please refer to the [README.md](./README.md) for more details.
 
+## Private Key Configuration
+
+The Fiamma Operator requires three private keys for different operations. You can configure these keys in two ways:
+
+### Option 1: Plaintext Private Keys (for testing)
+Set the private keys directly in the `.env` file:
+```
+# ⚠️  WARNING: Replace with your REAL private keys, these are just examples!
+BITVM_BRIDGE_OPERATOR_AUTH_SK=L1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12
+BITVM_BRIDGE_OPERATOR_PEGIN_SK=L2234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef23
+BITVM_BRIDGE_OPERATOR_PEGOUT_SK=L3234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef34
+```
+
+### Option 2: GPG Encrypted Private Keys (recommended for production)
+
+For enhanced security, especially in production environments, you can encrypt your private keys using GPG:
+
+#### 2.1 Encrypt Private Keys
+Use the `bcli encode` command to encrypt your private keys:
+
+```bash
+# Create a temporary file with your plaintext keys
+# ⚠️  WARNING: Replace with your REAL private keys!
+cat > temp_keys.env << EOF
+BITVM_BRIDGE_OPERATOR_AUTH_SK=L1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12
+BITVM_BRIDGE_OPERATOR_PEGIN_SK=L2234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef23
+BITVM_BRIDGE_OPERATOR_PEGOUT_SK=L3234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef34
+EOF
+
+# Encrypt the keys (will prompt for encryption password)
+./bcli encode -i temp_keys.env -o .env
+
+# Enable GPG mode
+echo "BITVM_BRIDGE_USE_GPG_KEYS=1" >> .env
+
+# Clean up the plaintext file
+rm temp_keys.env
+```
+
+#### 2.2 GPG Encrypted Format
+The encrypted keys are stored in single-line base64 format for reliability:
+```
+BITVM_BRIDGE_USE_GPG_KEYS=1
+# ⚠️  WARNING: These are EXAMPLE encrypted keys. Replace with your REAL encrypted keys!
+BITVM_BRIDGE_OPERATOR_AUTH_SK="EXAMPLE_BASE64_ENCRYPTED_AUTH_KEY_REPLACE_WITH_YOUR_REAL_ENCRYPTED_KEY"
+BITVM_BRIDGE_OPERATOR_PEGIN_SK="EXAMPLE_BASE64_ENCRYPTED_PEGIN_KEY_REPLACE_WITH_YOUR_REAL_ENCRYPTED_KEY"
+BITVM_BRIDGE_OPERATOR_PEGOUT_SK="EXAMPLE_BASE64_ENCRYPTED_PEGOUT_KEY_REPLACE_WITH_YOUR_REAL_ENCRYPTED_KEY"
+```
+
+#### 2.3 Security Features
+- **AES256 Encryption**: Uses industry-standard AES256 cipher
+- **Base64 Format**: Single-line format prevents parsing issues
+- **Secure Password Input**: Password prompt hidden during startup
+- **No Environment Variables**: Decryption password never stored in environment
+
+#### 2.4 Starting with Encrypted Keys
+
+**⚠️ Important Limitation**: GPG encrypted keys require interactive password input, which means:
+- **systemctl/systemd service mode is NOT supported**
+- The operator must be started manually from a terminal
+- Each restart requires re-entering the decryption password
+
+##### Manual Startup Options:
+
+**Option A: Foreground (for testing)**
+```bash
+export FIAMMA_MONO_CONFIG_PATH=./
+./fiamma-operator
+# Output: 🔐 Enter GPG decryption password: [hidden input]
+```
+
+**Option B: Background with nohup**
+```bash
+# Set config path
+export FIAMMA_MONO_CONFIG_PATH=./
+
+# Start in foreground first to enter password
+./fiamma-operator
+# After successful startup, you can use nohup for background operation:
+nohup env FIAMMA_MONO_CONFIG_PATH=./ ./fiamma-operator > .logs/operator.log 2>&1 &
+echo $! > .logs/operator.pid
+```
+
+**Option C: Using screen/tmux (recommended for production)**
+```bash
+# Start a screen session
+screen -S fiamma-operator
+
+# Inside screen, set config path and start the operator
+export FIAMMA_MONO_CONFIG_PATH=./
+./fiamma-operator
+# Enter password when prompted
+
+# Detach from screen: Ctrl+A, then D
+# To reattach later: screen -r fiamma-operator
+```
+
+##### Process Management for GPG Mode:
+
+**Check Status:**
+```bash
+ps aux | grep fiamma-operator | grep -v grep
+# Or using PID file:
+[ -f .logs/operator.pid ] && kill -0 $(cat .logs/operator.pid) 2>/dev/null && echo "Running" || echo "Stopped"
+```
+
+**Stop Operator:**
+```bash
+# Using PID file
+[ -f .logs/operator.pid ] && kill $(cat .logs/operator.pid) && rm .logs/operator.pid
+# Or find and kill
+pkill -f fiamma-operator
+```
+
+**Restart (requires password re-entry):**
+```bash
+pkill -f fiamma-operator && sleep 2 && export FIAMMA_MONO_CONFIG_PATH=./ && ./fiamma-operator
+```
+
+**Important**: Make sure to remember your encryption password, as it's required every time you start the operator.
 
 ## Operator Registration Process
 
