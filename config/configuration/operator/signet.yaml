@@ -33,6 +33,12 @@ max_pegout_amount: 300000000
 pegout_operator_fee_amount: 5000
 
 side_chains:
+  aptos:
+    enabled: true
+    bridge_address: 0x20e6e2a7f1bc08a338f5d118ebb016b610ec4b90e484c9ff29769357fd99a595
+    vault_router: 0x20e6e2a7f1bc08a338f5d118ebb016b610ec4b90e484c9ff29769357fd99a595
+    rpc_url: "https://testnet.aptoslabs.com"
+
   holesky:
     enabled: true
     bridge_address: 0xeCC7EB129fCa72DE21BD065F7FA3Ab1aD400820D
@@ -44,6 +50,18 @@ side_chains:
     bridge_address: 0x1dB460373869e23a3a04fa56a5405F27BfB67526
     vault_router: 0x1dB460373869e23a3a04fa56a5405F27BfB67526
     rpc_url: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
+  
+  zksync:
+    enabled: true
+    bridge_address: 0x32a597CbeC8168791653BDE11415E70A2c02f9cC
+    vault_router: 0x32a597CbeC8168791653BDE11415E70A2c02f9cC
+    rpc_url: "https://zksync-testnet.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+
+  arbitrum:
+    enabled: true
+    bridge_address: 0x863065a22E1E86AC976C5F1315591c7A802Bf59B
+    vault_router: 0x863065a22E1E86AC976C5F1315591c7A802Bf59B
+    rpc_url: "https://arb-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
 
   plume:
     enabled: true
@@ -62,6 +80,36 @@ side_chains:
     bridge_address: 0x938d19B736cc5C19C2613582844975789432ab5C
     vault_router: 0x938d19B736cc5C19C2613582844975789432ab5C
     rpc_url: "https://testnet.dplabs-internal.com"
+
+  core:
+    enabled: true
+    bridge_address: 0xF10c8e0C3c5e94944dB7BBDa42546d86905B3749
+    vault_router: 0xF10c8e0C3c5e94944dB7BBDa42546d86905B3749
+    rpc_url: "https://rpc.test2.btcs.network"
+  
+  polygon:
+    enabled: true
+    bridge_address: 0xC4c42EE12a9d04A26C2894c74242cd744f4579b5
+    vault_router: 0xC4c42EE12a9d04A26C2894c74242cd744f4579b5
+    rpc_url: "https://polygon-amoy.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+  
+  sei:
+    enabled: true
+    bridge_address: 0x325224D6b7da2f905F09976157b84512C670e9aF
+    vault_router: 0x325224D6b7da2f905F09976157b84512C670e9aF
+    rpc_url: "https://evm-rpc-testnet.sei-apis.com"
+
+  base:
+    enabled: true
+    bridge_address: 0xB777393684C2C8BEa1C5c117a182cd122A6F2673
+    vault_router: 0xB777393684C2C8BEa1C5c117a182cd122A6F2673
+    rpc_url: "https://base-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+  
+  unichain:
+    enabled: true
+    bridge_address: 0xb5F835668F5Da03d00Fad8A8b40357760483D6d7
+    vault_router: 0xb5F835668F5Da03d00Fad8A8b40357760483D6d7
+    rpc_url: "https://unichain-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
 
 
 # Prover configuration
