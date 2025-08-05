@@ -20,11 +20,15 @@ When running the operator for the first time, you need to use an invitation code
 
 Please contact Fiamma personnel to obtain your exclusive invitation code `invite_code`
 
-### 2. Prepare Bitcoin Addresses
+### 2. Prepare Bitcoin Addresses and Ethereum Address
 
-Prepare the private keys for the 3 Bitcoin addresses configured when starting the Fiamma Operator program: main address, pegin processing address, and pegout processing address. Please make sure to use 3 different Bitcoin addresses to prevent large UTXOs from being accidentally locked by pre-signed transactions. While funds won't be lost, it will reduce capital utilization.
+Prepare the private keys for the **3 Bitcoin addresses** configured when starting the Fiamma Operator program: main address, pegin processing address, and pegout processing address. Please make sure to use 3 different Bitcoin addresses to prevent large UTXOs from being accidentally locked by pre-signed transactions. While funds won't be lost, it will reduce capital utilization.
 
 > Please use p2tr type addresses
+
+Additionally, you need to prepare **1 Ethereum address** for the operator EVM secret key, which is used for staking FiaBTC. This corresponds to the `BITVM_BRIDGE_OPERATOR_ETH_SK` configuration in your `.env` file.
+
+> **Note**: You can obtain FiaBTC through pegin tasks on the bridge.
 
 ### 3. Get Main Account Public Key
 
@@ -58,8 +62,7 @@ To successfully complete staking, you need to transfer sufficient BTC to the ope
 > Currently, `stake_amount` is 1 BTC, so transfer at least 1.00001 BTC. Since subsequent work requires 15 BTC, it's recommended to transfer at least 16.00001 BTC initially.
 
 ### 2. Stake Funds
-
-When the operator's main address has sufficient BTC, execute the following command to complete staking:
+When the operator’s main address has sufficient BTC and the EVM address has enough FiaBTC for gas fees, execute the following command to complete staking:
 
 ```
 ./bcli operator -n beta-testnet stake
