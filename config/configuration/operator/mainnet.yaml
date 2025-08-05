@@ -1,0 +1,109 @@
+bridge_url: wss://bridge-api.fiammachain.io/ws
+bridge_http_url: https://beta-bridge-api.fiammachain.io/
+http_server_addr: 0.0.0.0:55000
+metrics_endpoint: 0.0.0.0:9102
+master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
+health_check_port: 54003
+connect_retry_times: 1
+bitcoin_confirms_threshold: 3
+bitcoin_network: Bitcoin
+mempool_url: https://rpc.ankr.com/premium-http/btc_blockbook/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8/api/v2
+bitcoin_rpc: https://bitcoin.fiammachain.io
+bitcoin_rpc_user: fiamma
+bitcoin_rpc_password: fiamma
+bridge_addresses:
+  - 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524 #ethereum
+  - 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee #aptos
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #sei
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #core
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #arbitrum
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #base
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #zksync
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #polygon
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #unichain
+  - 0xB93752eDA47B5c846332d4f32F7031C63658eCf3 #bsc
+  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #plume
+redis_url: redis://127.0.0.1:6379
+protocol_fee_address: "bc1pq75shgn94ek28sz6wlte2dlv6532dhwlkj7lqsjhdhyc059fprvsrckjkx"
+feerate_rpc_url: https://mempool.space/api/v1/fees/recommended
+vault_manager_addresses:
+  - 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
+  
+# Time lock in height
+# connector one's time lock
+connector_one_sequence: 72
+# connector three's time lock
+connector_three_sequence: 72
+# connector burn's time lock
+connector_burn_sequence: 144
+# operator stake time lock
+operator_stake_time_lock: 12960
+
+min_pegin_amount: 100000
+max_pegin_amount: 1000000
+min_pegout_amount: 100000
+max_pegout_amount: 1000000
+pegout_operator_fee_amount: 5000
+
+side_chains:
+  ethereum:
+    enabled: true
+    bridge_address: 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
+    vault_router: 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
+    rpc_url: "https://eth-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  aptos:
+    enabled: true
+    bridge_address: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
+    vault_router: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
+    rpc_url: "https://api.mainnet.aptoslabs.com/v1"
+  zksync:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://zksync-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  arbitrum:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://arb-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  plume:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://rpc.plume.org"
+  bsc:
+    enabled: true
+    bridge_address: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
+    vault_router: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
+    rpc_url: "https://bsc-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  core:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://rpc.ankr.com/core/91804ef545161e760e1c1116bffeb4aace5973a77febf357fe2e184ddecf476f"
+  polygon:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  sei:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://rpc.ankr.com/sei_evm/91804ef545161e760e1c1116bffeb4aace5973a77febf357fe2e184ddecf476f"
+  base:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://base-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  unichain:
+    enabled: true
+    bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    rpc_url: "https://unichain-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+
+# Prover configuration
+prover_config:
+  rpc_url: "http://127.0.0.1:4464"
+  user: "foo"
+  password: "bar"
