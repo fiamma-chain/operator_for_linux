@@ -30,8 +30,10 @@ Type=simple
 WorkingDirectory=$PROJECT_DIR
 ExecStart=$PROJECT_DIR/fiamma-operator
 Environment=FIAMMA_MONO_CONFIG_PATH=$PARENT_DIR/operator_for_linux
+Environment="RUST_MIN_STACK=16777216"
 Restart=on-failure
 RestartSec=15
+LimitSTACK=infinity
 
 [Install]
 WantedBy=multi-user.target

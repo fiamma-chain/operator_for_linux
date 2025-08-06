@@ -36,7 +36,7 @@ The main address's public key is required for registration. Here's how to obtain
 
 ```
 cd operator_for_linux
-./bcli operator -n beta-testnet derive-key -s <MAIN_ADDRESS_PRIVATE_KEY>
+./bcli operator -n mainnet derive-key -s <MAIN_ADDRESS_PRIVATE_KEY>
 ```
 Use `public_key` to complete the registration process below.
 
@@ -47,7 +47,7 @@ Use `public_key` to complete the registration process below.
 Execute the following command in the terminal to register as an operator:
 
 ```
-./bcli operator -n beta-testnet register --invitation-code <INVITATION_CODE> --main-address <MAIN_ADDRESS> --pegin-address <PEGIN_ADDRESS> --pegout-address <PEGOUT_ADDRESS> --public-key <MAIN_ADDRESS_PUBLIC_KEY>
+./bcli operator -n mainnet register --invitation-code <INVITATION_CODE> --main-address <MAIN_ADDRESS> --pegin-address <PEGIN_ADDRESS> --pegout-address <PEGOUT_ADDRESS> --public-key <MAIN_ADDRESS_PUBLIC_KEY> --evm-address <EVM_ADDRESS>
 ```
 
 ## Operator Staking Process
@@ -62,22 +62,53 @@ To successfully complete staking, you need to transfer sufficient BTC to the ope
 > Currently, `stake_amount` is 1 BTC, so transfer at least 1.00001 BTC. Since subsequent work requires 15 BTC, it's recommended to transfer at least 16.00001 BTC initially.
 
 ### 2. Stake Funds
-When the operator’s main address has sufficient BTC and the EVM address has enough FiaBTC for gas fees, execute the following command to complete staking:
+When the operator's main address has sufficient BTC and the EVM address has enough FiaBTC for gas fees, execute the following command to complete staking:
+
+> **⚠️ Important Performance Requirements:**
+> This command will generate BTC scripts and complete ETH-BTC staking operations. You need a high-performance machine (minimum 4 CPU cores and 48GB RAM) to run this command successfully. Depending on your machine's performance, this process may take 5-20 minutes to complete.
+>
+> **Please ensure:**
+> - Keep your terminal session active during the entire process
+> - Do not exit or interrupt the command while it's running
+> - Consider using `nohup` to run the command in the background if needed
 
 ```
-./bcli operator -n beta-testnet stake
+./bcli operator -n mainnet stake
+```
+
+**Alternative command using nohup (recommended for stability):**
+
+If you want to run the staking process in the background to avoid terminal disconnection issues, use the following commands:
+
+1. **Start the staking process with nohup:**
+```
+nohup ./bcli operator -n mainnet stake > stake.log 2>&1 &
+```
+
+2. **Get the process ID (will be displayed after running the command):**
+The system will show something like: `[1] 12345` (where 12345 is the process ID)
+
+3. **Monitor the progress in real-time:**
+```
+tail -f stake.log
+```
+Press `Ctrl+C` to stop monitoring (this won't stop the staking process)
+
+4. **Check if the process is still running:**
+```
+ps aux | grep "bcli operator"
 ```
 
 Check staking status:
 
 ```
-./bcli query -n beta-testnet stake -a <MAIN_ADDRESS>
+./bcli query -n mainnet stake -a <MAIN_ADDRESS>
 ```
 
 When the staking status is `committee_signed`, wait for the stake transaction to be confirmed on the blockchain (about 10 minutes), then you can check the operator status:
 
 ```
-./bcli query -n beta-testnet operator -a <MAIN_ADDRESS>
+./bcli query -n mainnet operator -a <MAIN_ADDRESS>
 ```
 
 If the `status` is `Active`, it means the operator has completed the staking process and has started working.
@@ -87,13 +118,13 @@ If the `status` is `Active`, it means the operator has completed the staking pro
 If an operator wants to stop receiving new tasks, they can execute the following command to pause receiving new pegin and pegout tasks, but will continue processing already received tasks.
 
 ```
-./bcli operator -n beta-testnet pause
+./bcli operator -n mainnet pause
 ```
 
 To resume receiving new tasks, execute the following command:
 
 ```
-./bcli operator -n beta-testnet resume
+./bcli operator -n mainnet resume
 ```
 
 If you want to permanently exit, you need to execute the following command to submit an unregister operator request. Please note that this will not immediately make the operator exit - it only notifies the bridge that the operator wants to exit. You will need to continue running the fiamma-operator for some time to complete all received pegin and pegout tasks.
@@ -101,13 +132,13 @@ If you want to permanently exit, you need to execute the following command to su
 When the bridge checks that the operator has met the exit conditions (processed all in-progress pegin and pegout tasks), it will automatically broadcast the operator's unstake transaction to help the operator recover their stake funds.
 
 ```
-./bcli operator -n beta-testnet unstake -a <MAIN_ADDRESS>
+./bcli operator -n mainnet unstake -a <MAIN_ADDRESS>
 ```
 
 When the operator's status changes to `Inactive`, you can withdraw all funds from the three addresses to a specified address:
 
 ```
-./bcli operator -n beta-testnet collect-utxos -r <RECEIVER_ADDRESS>
+./bcli operator -n mainnet collect-utxos -r <RECEIVER_ADDRESS>
 ```
 
 > ⚠️ **Important**: Do not execute the `collect-utxos` command while the operator is still active. This command should only be used after the operator has been fully deactivated and all pending tasks have been completed.
@@ -121,7 +152,7 @@ The following commands allow you to query various aspects of the operator's stat
 To view statistics about the operator's processing activities, including daily and weekly task counts:
 
 ```
-./bcli query -n beta-testnet processing-stats -i <OPERATOR_ID>
+./bcli query -n mainnet processing-stats -i <OPERATOR_ID>
 ```
 
 This command displays:
@@ -135,13 +166,13 @@ This command displays:
 To view pending pegin tasks that need to be processed:
 
 ```
-./bcli query -n beta-testnet pending-pegin -i <OPERATOR_ID>
+./bcli query -n mainnet pending-pegin -i <OPERATOR_ID>
 ```
 
 To view pending pegout tasks that need to be processed:
 
 ```
-./bcli query -n beta-testnet pending-pegout -i <OPERATOR_ID>
+./bcli query -n mainnet pending-pegout -i <OPERATOR_ID>
 ```
 
 These commands show the tasks currently waiting for operator processing, including their IDs, amounts, and update times.
@@ -151,7 +182,7 @@ These commands show the tasks currently waiting for operator processing, includi
 To view the operator's earnings from successfully processed tasks:
 
 ```
-./bcli query -n beta-testnet earnings -i <OPERATOR_ID>
+./bcli query -n mainnet earnings -i <OPERATOR_ID>
 ```
 
 This command displays:
@@ -164,7 +195,7 @@ This command displays:
 To view the operator's Annual Percentage Yield (APY) based on current performance:
 
 ```
-./bcli query -n beta-testnet apy -i <OPERATOR_ID>
+./bcli query -n mainnet apy -i <OPERATOR_ID>
 ```
 
 This command displays:
@@ -175,5 +206,5 @@ This command displays:
 Use --help to see more usage for APY query:
 
 ```
-./bcli query -n beta-testnet apy -i <OPERATOR_ID> --help
+./bcli query -n mainnet apy -i <OPERATOR_ID> --help
 ```
