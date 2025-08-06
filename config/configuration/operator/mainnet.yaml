@@ -35,11 +35,11 @@ evm_btcpeg_contract_address: 0x22F0E0a4c97ff43546dad16d43Ef854C773F0e08
 operator_manager_address: 0x0CE121F83613f0EAF131Ee48204B7101e8f61C7d
 # Time lock in height
 # connector one's time lock
-connector_one_sequence: 72
+connector_one_sequence: 6
 # connector three's time lock
-connector_three_sequence: 72
+connector_three_sequence: 6
 # connector burn's time lock
-connector_burn_sequence: 144
+connector_burn_sequence: 12
 # operator stake time lock
 operator_stake_time_lock: 12960
 
@@ -79,7 +79,7 @@ side_chains:
     enabled: true
     bridge_address: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
     vault_router: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
-    rpc_url: "https://bsc-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    rpc_url: "https://rpc.ankr.com/bsc/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8"
   core:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
