@@ -94,7 +94,7 @@ side_chains:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
-    rpc_url: "https://rpc.ankr.com/sei_evm/91804ef545161e760e1c1116bffeb4aace5973a77febf357fe2e184ddecf476f"
+    rpc_url: "https://sei-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
   base:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
