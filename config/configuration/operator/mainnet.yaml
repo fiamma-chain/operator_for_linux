@@ -105,6 +105,11 @@ side_chains:
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://unichain-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+  hyperliquid:
+    enabled: true
+    bridge_address: 0x62C737Ba25B8CE3b2d6650a1Dc44fE75e981B939
+    vault_router: 0x62C737Ba25B8CE3b2d6650a1Dc44fE75e981B939
+    rpc_url: "https://hyperliquid-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
 
 # Prover configuration
 prover_config:
