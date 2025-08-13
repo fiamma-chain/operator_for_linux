@@ -159,3 +159,89 @@ If you encounter issues:
    ```bash
    tail -f .logs/bitvm-operator/bitvm-operator.$(date +%Y-%m-%d).log
    ```
+
+## Start with GPG-encrypted private keys (via gpg-agent cache)
+
+This section adds a GPG-encrypted workflow without changing the original plaintext flow. You can keep using the original flow, or switch to encrypted keys with gpg-agent caching for systemd auto-restarts.
+
+### Step A: Generate encrypted keys with bcli
+
+1) Prepare a temporary plaintext file (do not keep it after encoding):
+
+```bash
+cat > /tmp/keys.env <<'EOF'
+BITVM_BRIDGE_OPERATOR_AUTH_SK="your_auth_wif"
+BITVM_BRIDGE_OPERATOR_PEGIN_SK="your_pegin_wif"
+BITVM_BRIDGE_OPERATOR_PEGOUT_SK="your_pegout_wif"
+BITVM_BRIDGE_OPERATOR_ETH_SK="0xYourEvmPrivateKey"
+EOF
+chmod 600 /tmp/keys.env
+```
+
+**Important security notes about /tmp/keys.env**:
+- This file contains plaintext private keys. Treat it as highly sensitive and only keep it for the briefest time needed to run the encoder.
+- Prefer a throwaway file and remove it immediately after encoding using a secure delete, for example:
+  - `shred -u /tmp/keys.env` (already shown below), or remove the file on a tmpfs (e.g., `/run` on many systems).
+- Avoid opening this file in editors that create backup/swap files. The redirection shown above (`cat > file <<EOF`) prevents accidental editor backups.
+- Ensure strict permissions (chmod 600) and do not commit this file to any repository or copy it into backups.
+- If you use shell history, avoid pasting secrets directly on the command line; the here‑document block above is safer than inline echo.
+
+2) Use the CLI encoder to symmetrically encrypt and output BASE64 ciphertexts:
+
+```bash
+# from repo root or ensure ./bcli exists in current dir
+# optional: export BCLI_PASSWORD to avoid prompt
+# export BCLI_PASSWORD='your-strong-passphrase'
+./bcli encode -i /tmp/keys.env -o ./gpg.env.encode
+```
+
+3) Append the following flags to enable GPG + agent mode in your `.env`:
+
+```bash
+echo 'BITVM_BRIDGE_USE_GPG_KEYS=1' >> ./.env
+echo 'BITVM_BRIDGE_USE_GPG_AGENT=1' >> ./.env
+```
+
+4) Copy the encrypted values into your project `.env` (replace the four keys):
+
+```bash
+sed -n 's/^\(BITVM_BRIDGE_OPERATOR_.*_SK\)=.*$/\1/p' ./gpg.env.encode | while read -r key; do
+  val=$(grep "^$key=" ./gpg.env.encode | cut -d '"' -f2)
+  # update .env in-place
+  sed -i "s#^$key=.*#$key=\"$val\"#" ./.env
+done
+```
+
+5) Remove the temporary plaintext file:
+
+```bash
+shred -u /tmp/keys.env
+```
+
+### Step B: Pre-warm gpg-agent cache once
+
+Do this as the same user that will run the operator (e.g. `ubuntu`). The passphrase will be cached for half year depending on your `~/.gnupg/gpg-agent.conf`.
+
+```bash
+# Optional but recommended TTL settings in ~/.gnupg/gpg-agent.conf:
+# default-cache-ttl 15552000
+# max-cache-ttl 15552000
+# pinentry-program /usr/bin/pinentry-curses
+
+# Warm up using one encrypted key from .env
+VAL=$(grep "^BITVM_BRIDGE_OPERATOR_AUTH_SK=" .env | cut -d '"' -f2)
+printf "%s" "$VAL" | base64 -d | gpg --decrypt >/dev/null
+```
+
+### Step C: Start with user-level systemd (uses your gpg-agent cache)
+
+Use the provided helper to install and start a user-level unit so the service shares your gpg-agent environment (no sudo needed):
+
+```bash
+chmod +x ./start_operator_encrypt.sh
+./start_operator_encrypt.sh
+```
+
+Notes:
+- The original `./start_operator.sh` (system-level) remains unchanged and can still be used with plaintext keys.
+- With the encrypted flow, user-level systemd is recommended so the process can access the user’s gpg-agent cache; crash/exit will auto-restart.
