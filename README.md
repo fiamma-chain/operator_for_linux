@@ -228,6 +228,21 @@ Do this as the same user that will run the operator (e.g. `ubuntu`). The passphr
 # max-cache-ttl 15552000
 # pinentry-program /usr/bin/pinentry-curses
 
+# If you changed gpg-agent.conf, reload the agent to apply settings
+gpgconf --kill gpg-agent || true
+gpg-connect-agent reloadagent /bye || true
+
+# Ensure pinentry is available (Debian/Ubuntu)
+# sudo apt-get install -y pinentry-curses
+
+# Pre-warm MUST be done in a TTY with GPG_TTY set (interactive first)
+export GPG_TTY=$(tty)
+VAL=$(grep "^BITVM_BRIDGE_OPERATOR_AUTH_SK=" .env | cut -d '"' -f2)
+printf "%s" "$VAL" | base64 -d | gpg --decrypt >/dev/null
+
+# Verify non-interactive decryption works via gpg-agent cache
+printf "%s" "$VAL" | base64 -d | gpg --decrypt --batch --quiet >/dev/null && echo OK || echo FAIL
+
 # Warm up using one encrypted key from .env
 VAL=$(grep "^BITVM_BRIDGE_OPERATOR_AUTH_SK=" .env | cut -d '"' -f2)
 printf "%s" "$VAL" | base64 -d | gpg --decrypt >/dev/null
