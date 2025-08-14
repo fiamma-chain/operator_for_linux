@@ -7,7 +7,7 @@ health_check_port: 54003
 connect_retry_times: 1
 bitcoin_confirms_threshold: 3
 default_bitcoin_feerate: 1
-max_presigned_feerate: 2
+max_presigned_feerate: 1
 bitcoin_network: Bitcoin
 mempool_url: https://rpc.ankr.com/premium-http/btc_blockbook/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8/api/v2
 bitcoin_rpc: https://bitcoin.fiammachain.io
