@@ -29,8 +29,6 @@ bridge_addresses:
 redis_url: redis://127.0.0.1:6379
 protocol_fee_address: "bc1pq75shgn94ek28sz6wlte2dlv6532dhwlkj7lqsjhdhyc059fprvsrckjkx"
 feerate_rpc_url: https://mempool.space/api/v1/fees/recommended
-vault_manager_addresses:
-  - 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
 evm_btcpeg_contract_address: 0x22F0E0a4c97ff43546dad16d43Ef854C773F0e08
 operator_manager_address: 0x0CE121F83613f0EAF131Ee48204B7101e8f61C7d
 # Time lock in height
@@ -93,7 +91,7 @@ side_chains:
   sei:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
-    vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
+    vault_router: 0x592B2d16a2aEC5a090499C494b32D62e279C7E99
     rpc_url: "https://sei-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
   base:
     enabled: true
