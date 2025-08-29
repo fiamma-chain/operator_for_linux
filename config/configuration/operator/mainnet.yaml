@@ -111,6 +111,6 @@ side_chains:
 
 # Prover configuration
 prover_config:
-  rpc_url: "http://127.0.0.1:4464"
+  rpc_url: "http://127.0.0.1:4444"
   user: "foo"
   password: "bar"
