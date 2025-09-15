@@ -1,12 +1,12 @@
 [package]
 name = "dal"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 
 [dependencies]
-logs = { path = "../logs" }
-types = { path = "../types" }
-config = { path = "../config" }
+logs = { workspace = true }
+types = { workspace = true }
+config = { workspace = true }
 tokio = { workspace = true }
 anyhow = { workspace = true }
 sqlx = { workspace = true }
