@@ -1,9 +1,9 @@
-bridge_url: ws://127.0.0.1:53001
-bridge_http_url: http://127.0.0.1:53000
-http_server_addr: 0.0.0.0:55000
+bridge_url: wss://beta-bridge-api.fiammachain.io/ws
+bridge_http_url: https://beta-bridge-api.fiammachain.io
+http_server_addr: 0.0.0.0:65000
 metrics_endpoint: 0.0.0.0:9102
 master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
-health_check_port: 53003
+health_check_port: 63003
 connect_retry_times: 1
 bitcoin_confirms_threshold: 1
 bitcoin_network: Signet
@@ -11,23 +11,16 @@ mempool_url: https://blockbook-bitcoin-signet.fiammachain.io/api/v2
 bitcoin_rpc: http://127.0.0.1:38332
 bitcoin_rpc_user: fiamma
 bitcoin_rpc_password: fiamma
-bridge_addresses:
-  - 0xD05B5494a10A1Fc28F242AB6B434C4f5806B163f  # evm
-  - bbn1qwlgtx52gsdu7dtp0cekka5zehdl0uj3fhp9acg325fvgs8jdzksawp5cw  # babylon
-  - 0xf5A285d27b5A51303aC9935FFeD7034443edFBb5 # bob
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # monad
-  - 0xFBfaC50135951efcc42E3A899B4796E11cF1AED3  # zksync
-  - 0xCD278573dACC392fD3a0CEA290F2d4d63c6cA707  # arbitrum
-  - 0x3FD7255cCC584397226461E57D0E1CFb1259621a  # optimism
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # plume
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # tatara
-  - 0x6c86428C81025b4a78D065f70044e315E4C360c8  # hemi
-  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # bsc
-redis_url: redis://127.0.0.1:7379
-protocol_fee_address: "tb1p2tge53kp4rxeqqq6s9jzq3ytvykecyaak5xs94ck6sgaaw2deycqs6dskr"
+default_bitcoin_feerate: 1
+max_presigned_feerate: 1
+max_withdraw_feerate: 1 
+evm_rpc_url: https://eth-sepolia.g.alchemy.com/v2/X-I5euyYWQPXGwS4XQ3t0DV1JUT0B9mr
+evm_btcpeg_contract_address: 0x913539E6cf3cC615c0af73FbA9c8701C13C194cf
+operator_manager_address: 0x8dB3706BdD473372dED06b91D188Cf96CE17E985
+
+redis_url: redis://127.0.0.1:6379
+protocol_fee_address: "tb1p529huj0urmtcm75qhjkn942e76aqzj33mg4g5kymagpcq5ncsqhsq7pr5x"
 feerate_rpc_url: https://mempool.space/signet/api/v1/fees/recommended
-vault_manager_addresses:
-  - 0xD05B5494a10A1Fc28F242AB6B434C4f5806B163f
 
 # Time lock in height
 # connector one's time lock
@@ -39,50 +32,145 @@ connector_burn_sequence: 12
 # operator stake time lock
 operator_stake_time_lock: 1
 
-min_pegin_amount: 100000
+min_pegin_amount: 20000
 max_pegin_amount: 300000000
-min_pegout_amount: 100000
+min_pegout_amount: 20000
 max_pegout_amount: 300000000
+max_pegout_count: 999999999
 pegout_operator_fee_amount: 5000
 
-# Side chains that the operator supports
-side_chains:
-  # - chain: "Ethereum"
-  - "Holesky"
-  - "Solana"
-  - "Anvil"
-  - "Babylon"
-  - "BOB"
-  - "Monad"
-  - "ZKSYNC"
-  - "Arbitrum"
-  - "Optimism"
-  - "Plume"
-  - "Tatara"
-  - "Hemi"
-  - "BSC"
 
-# Sidechain RPC URLs
-sidechain_rpc_urls:
-  ethereum: ""
-  holesky: ""
-  anvil: "http://127.0.0.1:8545"
-  bob: "https://bob-sepolia.rpc.gobob.xyz/"
-  monad: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
-  zksync: "https://sepolia.era.zksync.dev"
-  optimism: "https://sepolia.optimism.io"
-  arbitrum: "https://sepolia-rollup.arbitrum.io/rpc"
-  babylon: "http://babylon-testnet-grpc.polkachu.com:20690/"
-  solana: "https://api.devnet.solana.com"
-  plume: "https://testnet-rpc.plumenetwork.xyz"
-  tatara: "https://rpc.tatara.katanarpc.com/376fPkjX4x5yEmwJRWDyhN4DSofv1MSkE"
-  hemi: "https://testnet.rpc.hemi.network/rpc"
-  bsc: "https://bsc-testnet.bnbchain.org"
-  pharos: "https://testnet.dplabs-internal.com"
-  core: "https://rpc.test2.btcs.network"
+
+side_chains:
+  # holesky:
+  #   enabled: true
+  #   bridge_address: 0xaDD6bcf0469742fCCcf852c4633024f70BA0788F
+  #   vault_router: 0x223a040fbE36133d0625AcEF88B30929980a3AeD
+  #   rpc_url: "https://eth-holesky.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+
+  sepolia:
+    enabled: true
+    bridge_address: 0xe47aE1FAA60fCbfad4A9006190208B26C6896097
+    vault_router: 0xe47aE1FAA60fCbfad4A9006190208B26C6896097
+    rpc_url: "https://eth-sepolia.g.alchemy.com/v2/X-I5euyYWQPXGwS4XQ3t0DV1JUT0B9mr"
+    btc_peg_address: 0x913539E6cf3cC615c0af73FbA9c8701C13C194cf
+    balance_threshold: 200000
+
+  # aptos:
+  #   enabled: true
+  #   bridge_address: 0xeed4b8e27b6bd68e902e0e20633814d0d6d1a1c096763507fcaf058854a5b9b4
+  #   vault_router: 0xeed4b8e27b6bd68e902e0e20633814d0d6d1a1c096763507fcaf058854a5b9b4
+  #   rpc_url: "https://fullnode.testnet.aptoslabs.com"
+
+  # solana:
+  #   enabled: true
+  #   bridge_address: 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An
+  #   vault_router: 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An
+  #   rpc_url: "https://api.devnet.solana.com"
+
+  # monad:
+  #   enabled: true
+  #   bridge_address: 0xa93005d851949D695614c80B1c7E7DBF933F3042
+  #   vault_router: 0xa93005d851949D695614c80B1c7E7DBF933F3042
+  #   rpc_url: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
+
+  # plume:
+  #   enabled: true
+  #   bridge_address: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+  #   vault_router: 0x9B3Eb09efd2C58f1BcABF47afDE0b44F6b63387e
+  #   rpc_url: "https://testnet-rpc.plumenetwork.xyz"
+
+  # bsc:
+  #   enabled: true
+  #   bridge_address: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   vault_router: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   rpc_url: "https://bsc-testnet.bnbchain.org"
+
+  # pharos:
+  #   enabled: true
+  #   bridge_address: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   vault_router: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   rpc_url: "https://testnet.dplabs-internal.com"
+
+  # core:
+  #   enabled: true
+  #   bridge_address: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   vault_router: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+  #   rpc_url: "https://rpc.test2.btcs.network"
+
+  # starknet:
+  #   enabled: true
+  #   bridge_address: 0x14331d2b5b4f9a083941f5c45c402898b76f171343ed3ee4ae38f3a8c08b67b
+  #   vault_router: 0x14331d2b5b4f9a083941f5c45c402898b76f171343ed3ee4ae38f3a8c08b67b
+  #   rpc_url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_8"
+
+  # polygon:
+  #   enabled: true
+  #   bridge_address: 0x2E4db0b8E171d0e06284cA33dFe44485ecf3c111
+  #   vault_router: 0x2E4db0b8E171d0e06284cA33dFe44485ecf3c111
+  #   rpc_url: "https://polygon-amoy.drpc.org"
+
+  # babylon:
+  #   enabled: false
+  #   bridge_address: bbn1kuglu9hazls93h4pwcehk6gwrvv9uznfja6afjdanyud8fwkzlrqqj7app
+  #   vault_router: bbn1kuglu9hazls93h4pwcehk6gwrvv9uznfja6afjdanyud8fwkzlrqqj7app
+  #   rpc_url: "http://babylon-testnet-grpc.polkachu.com:20690/"
+
+  # bob:
+  #   enabled: false
+  #   bridge_address: 0x21F587c40fe9D23CC02D043F6737f4FE5CED77E8
+  #   vault_router: 0x21F587c40fe9D23CC02D043F6737f4FE5CED77E8
+  #   rpc_url: "https://bob-sepolia.rpc.gobob.xyz/"
+
+  # zksync:
+  #   enabled: false
+  #   bridge_address: 0x8075569554f75cBD1e7670d9d8dF4EB4E961F5D4
+  #   vault_router: 0x8075569554f75cBD1e7670d9d8dF4EB4E961F5D4
+  #   rpc_url: "https://sepolia.era.zksync.dev"
+
+  # arbitrum:
+  #   enabled: false
+  #   bridge_address: 0x5b56a9D8e965FbCBc80FBbcF6FC261F83b80Ef83
+  #   vault_router: 0x5b56a9D8e965FbCBc80FBbcF6FC261F83b80Ef83
+  #   rpc_url: "https://sepolia-rollup.arbitrum.io/rpc"
+
+  # optimism:
+  #   enabled: false
+  #   bridge_address: 0xb9E90c261cb84149b577E59e31dFbEd812E037Ba
+  #   vault_router: 0x5b56a9D8e965FbCBc80FBbcF6FC261F83b80Ef83
+  #   rpc_url: "https://sepolia.optimism.io"
+
+  # tatara:
+  #   enabled: false
+  #   bridge_address: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+  #   vault_router: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+  #   rpc_url: "https://rpc.tatara.katanarpc.com/376fPkjX4x5yEmwJRWDyhN4DSofv1MSkE"
+
+  # hemi:
+  #   enabled: false
+  #   bridge_address: 0x6c86428C81025b4a78D065f70044e315E4C360c8
+  #   vault_router: 0x6c86428C81025b4a78D065f70044e315E4C360c8
+  #   rpc_url: "https://testnet.rpc.hemi.network/rpc"
+
+  # sei:
+  #   enabled: true
+  #   bridge_address: 0x28EFc4E816438c760C47d44dE164A11d628f27eD
+  #   vault_router: 0x28EFc4E816438c760C47d44dE164A11d628f27eD
+  #   rpc_url: "https://sei-testnet.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+  # base:
+  #   enabled: true
+  #   bridge_address: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+  #   vault_router: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+  #   rpc_url: "https://base-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+  # unichain:
+  #   enabled: true
+  #   bridge_address: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+  #   vault_router: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+  #   rpc_url: "https://unichain-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+
 
 # Prover configuration
 prover_config:
-  rpc_url: "http://127.0.0.1:4464"
+  rpc_url: "http://127.0.0.1:4444"
   user: "foo"
   password: "bar"

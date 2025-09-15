@@ -11,26 +11,16 @@ mempool_url: unused
 bitcoin_rpc: http://127.0.0.1:18443/wallet/benefactor
 bitcoin_rpc_user: test
 bitcoin_rpc_password: 1234
-bridge_addresses:
-  - 0x5FC8d32690cc91D4c39d9d3abcBD16989F875707  # evm
-  - bbn17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgs6spw0g  # babylon
-  - 0xfe0BB5287351408540E1ff646dEF342E412e9058  # bob
-  - 0xfe0BB5287351408540E1ff646dEF342E412e9058  # monad
-  - 0x27121685e3031c467a5142Eb22f2b712aA84bcF7  # zksync
-  - 0x94367f2510CcAa6AE8c596CB9A9095E3B04fBBE0  # arbitrum
-  - 0xfe0BB5287351408540E1ff646dEF342E412e9058  # optimism
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # plume
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # tatara
-  - 0x6c86428C81025b4a78D065f70044e315E4C360c8  # hemi
-  - 0xCD278573dACC392fD3a0CEA290F2d4d63c6cA707  # bsc
-  - 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a  # pharos
-  - 0x552747a0e293cdFfDC07348032579436bE8Ab2D3  # core
-  - 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An  # solana
+default_bitcoin_feerate: 1
+max_presigned_feerate: 1
+max_withdraw_feerate: 1
+
+evm_rpc_url: http://127.0.0.1:8545
 redis_url: redis://127.0.0.1:6379
 protocol_fee_address: "bcrt1p0p3rvwww0v9znrclp00uneq8ytre9kj922v8fxhnezm3mgsmn9usdxaefc"
 feerate_rpc_url: unused
-vault_manager_addresses:
-  - 0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+evm_btcpeg_contract_address: 0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+operator_manager_address: 0x0B306BF915C4d645ff596e518fAf3F9669b97016
 
 # Time lock in height
 # connector one's time lock
@@ -42,51 +32,160 @@ connector_burn_sequence: 12
 # operator stake time lock
 operator_stake_time_lock: 1
 
-min_pegin_amount: 100000
+min_pegin_amount: 20000
 max_pegin_amount: 300000000
-min_pegout_amount: 100000
+min_pegout_amount: 20000
 max_pegout_amount: 300000000
+max_pegout_count: 999999999
 pegout_operator_fee_amount: 5000
 
-# Side chains that the operator supports
-side_chains:
-  - "Anvil"
-  # - "Holesky"
-  # - "Solana"
-  # - "Babylon"
-  # - "BOB"
-  # - "Monad"
-  # - "ZKSYNC"
-  # - "Arbitrum"
-  # - "Optimism"
-  # - "Plume"
-  # - "Tatara"
-  # - "Hemi"
-  # - "BSC"
-  # - "Pharos"
-  # - "Core"
 
-# Sidechain RPC URLs
-sidechain_rpc_urls:
-  ethereum: ""
-  holesky: ""
-  anvil: "http://127.0.0.1:8545"
-  bob: "https://bob-sepolia.rpc.gobob.xyz/"
-  monad: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
-  zksync: "https://sepolia.era.zksync.dev"
-  optimism: "https://sepolia.optimism.io"
-  arbitrum: "https://sepolia-rollup.arbitrum.io/rpc"
-  babylon: "http://babylon-testnet-grpc.polkachu.com:20690/"
-  solana: "https://api.devnet.solana.com"
-  plume: "https://testnet-rpc.plumenetwork.xyz"
-  tatara: "https://rpc.tatara.katanarpc.com/376fPkjX4x5yEmwJRWDyhN4DSofv1MSkE"
-  hemi: "https://testnet.rpc.hemi.network/rpc"
-  bsc: "https://bsc-testnet.bnbchain.org"
-  pharos: "https://testnet.dplabs-internal.com"
-  core: "https://rpc.test2.btcs.network"
+
+side_chains:
+  anvil:
+    enabled: true
+    bridge_address: 0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
+    vault_router: 0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6
+    rpc_url: "http://127.0.0.1:8545"
+    btc_peg_address: 0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+    balance_threshold: 200000
+  aptos:
+    enabled: false
+    bridge_address: 0xc70be23fa7b086eb766776ca78e0d0633b5c0d1a58fa1b6e1f2207f481452e1c
+    vault_router: 0xc70be23fa7b086eb766776ca78e0d0633b5c0d1a58fa1b6e1f2207f481452e1c
+    rpc_url: "https://fullnode.testnet.aptoslabs.com"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  babylon:
+    enabled: false
+    bridge_address: bbn17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgs6spw0g
+    vault_router: bbn17p9rzwnnfxcjp32un9ug7yhhzgtkhvl9jfksztgw5uh69wac2pgs6spw0g
+    rpc_url: "http://babylon-testnet-grpc.polkachu.com:20690/"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  bob:
+    enabled: false
+    bridge_address: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    vault_router: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    rpc_url: "https://bob-sepolia.rpc.gobob.xyz/"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  monad:
+    enabled: false
+    bridge_address: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    vault_router: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    rpc_url: "https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  zksync:
+    enabled: false
+    bridge_address: 0x27121685e3031c467a5142Eb22f2b712aA84bcF7
+    vault_router: 0x27121685e3031c467a5142Eb22f2b712aA84bcF7
+    rpc_url: "https://sepolia.era.zksync.dev"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  arbitrum:
+    enabled: false
+    bridge_address: 0x94367f2510CcAa6AE8c596CB9A9095E3B04fBBE0
+    vault_router: 0x94367f2510CcAa6AE8c596CB9A9095E3B04fBBE0
+    rpc_url: "https://sepolia-rollup.arbitrum.io/rpc"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  optimism:
+    enabled: false
+    bridge_address: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    vault_router: 0xfe0BB5287351408540E1ff646dEF342E412e9058
+    rpc_url: "https://sepolia.optimism.io"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  plume:
+    enabled: false
+    bridge_address: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    vault_router: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    rpc_url: "https://testnet-rpc.plumenetwork.xyz"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  tatara:
+    enabled: false
+    bridge_address: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    vault_router: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    rpc_url: "https://rpc.tatara.katanarpc.com/376fPkjX4x5yEmwJRWDyhN4DSofv1MSkE"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  hemi:
+    enabled: false
+    bridge_address: 0x6c86428C81025b4a78D065f70044e315E4C360c8
+    vault_router: 0x6c86428C81025b4a78D065f70044e315E4C360c8
+    rpc_url: "https://testnet.rpc.hemi.network/rpc"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  bsc:
+    enabled: false
+    bridge_address: 0xCD278573dACC392fD3a0CEA290F2d4d63c6cA707
+    vault_router: 0xCD278573dACC392fD3a0CEA290F2d4d63c6cA707
+    rpc_url: "https://bsc-testnet.bnbchain.org"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  pharos:
+    enabled: false
+    bridge_address: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+    vault_router: 0x8E4F0CF31B2Cf8b165c11b7b42eB841d51079C3a
+    rpc_url: "https://testnet.dplabs-internal.com"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  core:
+    enabled: false
+    bridge_address: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    vault_router: 0x552747a0e293cdFfDC07348032579436bE8Ab2D3
+    rpc_url: "https://rpc.test2.btcs.network"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  polygon:
+    enabled: false
+    bridge_address: 0x2E4db0b8E171d0e06284cA33dFe44485ecf3c111
+    vault_router: 0x2E4db0b8E171d0e06284cA33dFe44485ecf3c111
+    rpc_url: "https://polygon-amoy.drpc.org"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  solana:
+    enabled: false
+    bridge_address: 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An
+    vault_router: 8hPLqJVKkmSVoM7JYvFJ8KN5B2RTrJxx8rbBoh8hX1An
+    rpc_url: "https://api.devnet.solana.com"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  starknet:
+    enabled: false
+    bridge_address: 0x14331d2b5b4f9a083941f5c45c402898b76f171343ed3ee4ae38f3a8c08b67b
+    vault_router: 0x14331d2b5b4f9a083941f5c45c402898b76f171343ed3ee4ae38f3a8c08b67b
+    rpc_url: "https://starknet-sepolia.public.blastapi.io/rpc/v0_8"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  sei:
+    enabled: false
+    bridge_address: 0x28EFc4E816438c760C47d44dE164A11d628f27eD
+    vault_router: 0x28EFc4E816438c760C47d44dE164A11d628f27eD
+    rpc_url: "https://sei-testnet.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  base:
+    enabled: false
+    bridge_address: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+    vault_router: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+    rpc_url: "https://base-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+    btc_peg_address: ""
+    balance_threshold: 200000
+  unichain:
+    enabled: false
+    bridge_address: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+    vault_router: 0x2374FBc528A66F23cA0c3fD05C23AD45534eF433
+    rpc_url: "https://unichain-sepolia.g.alchemy.com/v2/xS1PQwOzOrX7U4AzG9IYnkgMWcdxQbX4"
+    btc_peg_address: ""
+    balance_threshold: 200000
+
 
 # Prover configuration
 prover_config:
-  rpc_url: "http://127.0.0.1:4464"
+  rpc_url: "http://127.0.0.1:4444"
   user: "foo"
   password: "bar"
