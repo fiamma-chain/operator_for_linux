@@ -17,6 +17,27 @@ if ! pidof systemd > /dev/null; then
   exit 1
 fi
 
+# Check if required services (PostgreSQL and Redis) are running
+echo "Checking required dependencies..."
+
+# Check PostgreSQL container by specific name and running status
+if ! sudo docker ps --filter "name=bitvm_operator_db" --filter "status=running" | grep -q bitvm_operator_db; then
+  echo "Error: PostgreSQL container (bitvm_operator_db) is not running."
+  echo "Please run the setup script first: ./setup.sh"
+  exit 1
+fi
+
+# Check Redis container by specific name and running status
+if ! sudo docker ps --filter "name=redis" --filter "status=running" | grep -q redis; then
+  echo "Error: Redis container (redis) is not running."
+  echo "Please run the setup script first: ./setup.sh"
+  exit 1
+fi
+
+echo "✓ PostgreSQL container (bitvm_operator_db) is running"
+echo "✓ Redis container (redis) is running"
+echo ""
+
 # Create systemd service unit file (if it doesn't exist)
 if [ ! -f "$SYSTEMD_PATH" ]; then
   echo "Creating systemd service file at $SYSTEMD_PATH"
