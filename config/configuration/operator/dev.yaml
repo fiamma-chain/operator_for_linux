@@ -11,9 +11,9 @@ mempool_url: https://blockbook-bitcoin-signet.fiammachain.io/api/v2
 bitcoin_rpc: https://bitcoin-signet.fiammachain.io
 bitcoin_rpc_user: fiamma
 bitcoin_rpc_password: fiamma
-default_bitcoin_feerate: 1
-max_presigned_feerate: 1
-max_withdraw_feerate: 1 
+default_bitcoin_feerate: 2
+max_presigned_feerate: 2
+max_withdraw_feerate: 2 
 evm_rpc_url: https://eth-sepolia.g.alchemy.com/v2/X-I5euyYWQPXGwS4XQ3t0DV1JUT0B9mr
 evm_btcpeg_contract_address: 0x913539E6cf3cC615c0af73FbA9c8701C13C194cf
 operator_manager_address: 0x8dB3706BdD473372dED06b91D188Cf96CE17E985
@@ -54,7 +54,7 @@ side_chains:
     vault_router: 0xe47aE1FAA60fCbfad4A9006190208B26C6896097
     rpc_url: "https://eth-sepolia.g.alchemy.com/v2/X-I5euyYWQPXGwS4XQ3t0DV1JUT0B9mr"
     btc_peg_address: 0x913539E6cf3cC615c0af73FbA9c8701C13C194cf
-    balance_threshold: 200000
+    balance_threshold: 20000
 
   # aptos:
   #   enabled: true
