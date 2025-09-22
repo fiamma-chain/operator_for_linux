@@ -15,7 +15,7 @@ if docker ps -a | grep -q redis; then
 else
   # Run Redis in Docker
   echo "Creating and starting Redis container..."
-  docker run --name redis -p 6379:6379 -d redis:latest
+  docker run --name redis --restart unless-stopped -p 6379:6379 -d redis:latest
 fi
 
 # Verify Redis is running
