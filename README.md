@@ -63,6 +63,7 @@ Make sure to update these required private keys:
 BITVM_BRIDGE_OPERATOR_AUTH_SK=your_auth_private_key
 BITVM_BRIDGE_OPERATOR_PEGIN_SK=your_pegin_private_key
 BITVM_BRIDGE_OPERATOR_PEGOUT_SK=your_pegout_private_key
+BITVM_BRIDGE_OPERATOR_ETH_SK=your_eth_private_key
 ```
 These private keys are essential for the Operator to function correctly and should not be the same.
 

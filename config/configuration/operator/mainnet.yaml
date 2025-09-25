@@ -8,6 +8,7 @@ connect_retry_times: 1
 bitcoin_confirms_threshold: 3
 default_bitcoin_feerate: 1
 max_presigned_feerate: 1
+max_withdraw_feerate: 1
 bitcoin_network: Bitcoin
 mempool_url: https://rpc.ankr.com/premium-http/btc_blockbook/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8/api/v2
 bitcoin_rpc: https://bitcoin.fiammachain.io
@@ -45,6 +46,7 @@ min_pegin_amount: 20000
 max_pegin_amount: 300000000
 min_pegout_amount: 20000
 max_pegout_amount: 300000000
+max_pegout_count: 999999999
 pegout_operator_fee_amount: 5000
 
 side_chains:
@@ -53,61 +55,85 @@ side_chains:
     bridge_address: 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
     vault_router: 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
     rpc_url: "https://eth-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x22F0E0a4c97ff43546dad16d43Ef854C773F0e08
+    balance_threshold: 20000000
   aptos:
     enabled: true
     bridge_address: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
     vault_router: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
     rpc_url: "https://api.mainnet.aptoslabs.com/v1"
+    btc_peg_address: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
+    balance_threshold: 20000000
   zksync:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://zksync-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   arbitrum:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://arb-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   plume:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://rpc.plume.org"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   bsc:
     enabled: true
     bridge_address: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
     vault_router: 0xB93752eDA47B5c846332d4f32F7031C63658eCf3
     rpc_url: "https://rpc.ankr.com/bsc/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8"
+    btc_peg_address: 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524
+    balance_threshold: 20000000    
   core:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://rpc.ankr.com/core/91804ef545161e760e1c1116bffeb4aace5973a77febf357fe2e184ddecf476f"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   polygon:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   sei:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0x592B2d16a2aEC5a090499C494b32D62e279C7E99
     rpc_url: "https://sei-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   base:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://base-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   unichain:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     vault_router: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
     rpc_url: "https://unichain-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x60C230c38aF6d86b0277a98a1CAeAA345a7B061F
+    balance_threshold: 20000000    
   hyperliquid:
     enabled: true
     bridge_address: 0x62C737Ba25B8CE3b2d6650a1Dc44fE75e981B939
     vault_router: 0x62C737Ba25B8CE3b2d6650a1Dc44fE75e981B939
     rpc_url: "https://hyperliquid-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N"
+    btc_peg_address: 0x0CEDa114F533D540c8aF2AeB52942c1a4A0B1e86
+    balance_threshold: 20000000    
 
 # Prover configuration
 prover_config:
