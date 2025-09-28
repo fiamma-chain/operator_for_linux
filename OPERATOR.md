@@ -56,6 +56,8 @@ Execute the following command in the terminal to register as an operator:
 
 After the Operator program starts running, it needs to stake BTC before starting work. If the operator behaves properly (does not act maliciously), they can unstake their BTC after completing their work.
 
+**Important**: Staking requires FiaBTC tokens as staking collateral on the EVM address, and ETH for gas fees. You can obtain FiaBTC through the bridge at https://app.fiammalabs.io/bridge
+
 ### 1. Transfer Funds
 To successfully complete staking, you need to transfer sufficient BTC to the operator's main address, at least `stake_amount` + `dust` + `gas` BTC.
 
