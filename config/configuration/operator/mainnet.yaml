@@ -5,28 +5,24 @@ metrics_endpoint: 0.0.0.0:9102
 master_db_url: postgres://admin:admin123@localhost:7433/bitvm-operator
 health_check_port: 54003
 connect_retry_times: 1
-bitcoin_confirms_threshold: 3
 default_bitcoin_feerate: 1
 max_presigned_feerate: 1
 max_withdraw_feerate: 1
 bitcoin_network: Bitcoin
 mempool_url: https://rpc.ankr.com/premium-http/btc_blockbook/891e6b1e8c8ad072f859722ee16806bc438afd84eda15a1678af53886b8a42e8/api/v2
-bitcoin_rpc: https://bitcoin.fiammachain.io
-bitcoin_rpc_user: fiamma
-bitcoin_rpc_password: fiamma
 evm_rpc_url: https://eth-mainnet.g.alchemy.com/v2/6whUvFvYbV8SHwTehnD4N
-bridge_addresses:
-  - 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524 #ethereum
-  - 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee #aptos
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #sei
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #core
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #arbitrum
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #base
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #zksync
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #polygon
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #unichain
-  - 0xB93752eDA47B5c846332d4f32F7031C63658eCf3 #bsc
-  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #plume
+#bridge_addresses:
+#  - 0xafB253A80CEb3d1a5eeF3994C0d1C92c2f027524 #ethereum
+#  - 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee #aptos
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #sei
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #core
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #arbitrum
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #base
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #zksync
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #polygon
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #unichain
+#  - 0xB93752eDA47B5c846332d4f32F7031C63658eCf3 #bsc
+#  - 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7 #plume
 redis_url: redis://127.0.0.1:6379
 protocol_fee_address: "bc1pq75shgn94ek28sz6wlte2dlv6532dhwlkj7lqsjhdhyc059fprvsrckjkx"
 feerate_rpc_url: https://mempool.space/api/v1/fees/recommended
