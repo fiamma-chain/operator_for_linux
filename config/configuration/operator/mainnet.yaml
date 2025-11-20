@@ -60,6 +60,13 @@ side_chains:
     rpc_url: "https://api.mainnet.aptoslabs.com/v1"
     btc_peg_address: 0x094ff62f3aca82c9f6cb5f80d987f18ea834692425f97aaa4bdf8f73c3c0a7ee
     balance_threshold: 20000000
+  monad:
+    enabled: true
+    bridge_address: 0x9b7764C6819DCF005436f788e166eE8CEC643d17
+    vault_router: 0x9b7764C6819DCF005436f788e166eE8CEC643d17
+    rpc_url: "https://rpc-mainnet.monadinfra.com/rpc/wu0bno57wmbJt40rOlBbNl6Mbl3dR9qK"
+    btc_peg_address: 0x756BcCEEDA5737238a5b00915E638dCa23618a3e
+    balance_threshold: 20000000
   zksync:
     enabled: true
     bridge_address: 0xCFA380e51AB0DBCC1Bea7D902f11A2E36325E1F7
